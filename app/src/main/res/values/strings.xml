@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Device</string>
+    <string name="city">City: </string>
+    <string name="region">Region: </string>
+    <string name="company">Company: </string>
+
 </resources>

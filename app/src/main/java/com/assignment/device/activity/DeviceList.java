@@ -1,8 +1,10 @@
-package com.assignment.device;
+package com.assignment.device.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.assignment.device.R;
 
 public class DeviceList extends AppCompatActivity {
 

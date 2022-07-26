@@ -1,4 +1,4 @@
-package com.assignment.device
+package com.assignment.device.data
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -38,4 +38,7 @@ object Utils {
             return networkInfo.isConnected
         }
     }
+
+     const val IP_ADDRESS="https://api.ipify.org/?format=json"
+     const val IP_DETAILS="https://ipinfo.io/"
 }
