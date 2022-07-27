@@ -39,6 +39,6 @@ object Utils {
         }
     }
 
-     const val IP_ADDRESS="https://api.ipify.org/?format=json"
-     const val IP_DETAILS="https://ipinfo.io/"
+    const val IP_ADDRESS = "https://api.ipify.org/?format=json"
+    const val IP_DETAILS = "https://ipinfo.io/"
 }

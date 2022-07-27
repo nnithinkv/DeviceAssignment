@@ -2,12 +2,14 @@ package com.assignment.device.activity
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.assignment.device.R
+import com.assignment.device.data.Device
+import com.assignment.device.data.DeviceRepository
 import com.assignment.device.data.Utils
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -37,6 +39,23 @@ class MainActivity : AppCompatActivity() {
             else Toast.makeText(this@MainActivity, "Network not available", Toast.LENGTH_LONG)
                 .show()
         }
+        val repo = DeviceRepository(this)
+        repo.deleteAllDevice()
+        val deviceList: List<Device> = listOf(
+            Device(
+                deviceName = "Samsung smart TV",
+                ipAddress = "192.168.2.1",
+                status = "Active"
+            ), Device(
+                deviceName = "Amazon Alexa",
+                ipAddress = "192.168.1.1",
+                status = "Inactive"
+            )
+        )
+        for (device in deviceList)
+            repo.insertDevice(device)
+
+
     }
 
     private fun signIn() {
@@ -56,8 +75,9 @@ class MainActivity : AppCompatActivity() {
                     if (account != null) {
                         getPreferences(MODE_PRIVATE).edit().putString("token", account?.idToken)
                             .commit();
-                        val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+                        val intent = Intent(this@MainActivity, DeviceList::class.java)
                         startActivity(intent)
+                        finish()
                     }
                 } catch (e: ApiException) {
                     Log.e("TAG", "signInResult:failed code=" + e.statusCode)
@@ -70,8 +90,9 @@ class MainActivity : AppCompatActivity() {
         if (Utils.checkForInternet(this@MainActivity)) {
             val account = GoogleSignIn.getLastSignedInAccount(this)
             if (account != null) {
-                val intent = Intent(this@MainActivity, DetailsActivity::class.java)
+                val intent = Intent(this@MainActivity, DeviceList::class.java)
                 startActivity(intent)
+                finish()
             }
         } else {
             mGoogleSignInClient?.signOut()?.addOnCompleteListener(

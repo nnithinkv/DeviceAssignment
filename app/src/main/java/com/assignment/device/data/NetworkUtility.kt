@@ -13,7 +13,7 @@ class NetworkUtility {
 
     companion object {
 
-        suspend fun request(url:URL): String{
+        suspend fun request(url: URL): String {
             return suspendCancellableCoroutine { continuation ->
                 try {
                     val reader: BufferedReader
